@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using address_book.Models;
 
 namespace address_book.Data
 {
@@ -9,5 +10,6 @@ namespace address_book.Data
             : base(options)
         {
         }
+        public DbSet<address_book.Models.Contact>? Contact { get; set; }
     }
 }
