@@ -6,7 +6,7 @@
         public string? Name { get; set; }
         public int Phone { get; set; }
         public string? Email { get; set; }
-        public string? ContactAddress { get; set; }
+        public string? Address { get; set; }
 
         public Contact()
         {

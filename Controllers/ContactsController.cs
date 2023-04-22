@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using address_book.Data;
 using address_book.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace address_book.Controllers
 {
@@ -27,6 +28,20 @@ namespace address_book.Controllers
                           Problem("Entity set 'ApplicationDbContext.Contact'  is null.");
         }
 
+        // GET: Contacts/ShowSearchForm
+        public IActionResult ShowSearchForm()
+        {
+            return _context.Contact != null ?
+                        View() :
+                        Problem("Entity set 'ApplicationDbContext.Contact'  is null.");
+        }
+
+        // POST: Contacts/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(String Search)
+        {
+            return View("Index", await _context.Contact.Where(contact => contact.Name.Contains(Search)).ToListAsync());
+        }
+        [Authorize]
         // GET: Contacts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,7 +59,7 @@ namespace address_book.Controllers
 
             return View(contact);
         }
-
+        [Authorize]
         // GET: Contacts/Create
         public IActionResult Create()
         {
@@ -56,7 +71,7 @@ namespace address_book.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Phone,Email,ContactAddress")] Contact contact)
+        public async Task<IActionResult> Create([Bind("Id,Name,Phone,Email,Address")] Contact contact)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +81,7 @@ namespace address_book.Controllers
             }
             return View(contact);
         }
-
+        [Authorize]
         // GET: Contacts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -86,9 +101,10 @@ namespace address_book.Controllers
         // POST: Contacts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Email,ContactAddress")] Contact contact)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Email,Address")] Contact contact)
         {
             if (id != contact.Id)
             {
@@ -117,7 +133,7 @@ namespace address_book.Controllers
             }
             return View(contact);
         }
-
+        [Authorize]
         // GET: Contacts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -135,7 +151,7 @@ namespace address_book.Controllers
 
             return View(contact);
         }
-
+        [Authorize]
         // POST: Contacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
