@@ -1,8 +1,12 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center  hero-container">
+    <h1 class="display-5 fw-bold sm hero pb-4">Take Control of Your <span class="accent">Contact List</span></h1>
+    <p class="pb-5 subtitle">Easily build and store your contacts in one place with <span class="accent">ContactSpot</span>.</p>
+    <button class="primary-btn" asp-area="Identity" onclick="location.href='Identity/Account/Register'">Get Started</button>
 </div>

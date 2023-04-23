@@ -3,12 +3,13 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Address Book</h1>
-
-<p>
-    <a asp-action="Create">Create New Contact</a>
-</p>
+<section class="page">
+    <div class="d-flex flex-row justify-content-between">
+         <h2>Address Book</h2>
+         <form method="get" asp-action="Create">
+             <button type="submit" class="primary-btn">Create New Contact</button>
+         </form>
+    </div>
 <table class="table">
     <thead>
         <tr>
@@ -37,9 +38,6 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -48,3 +46,4 @@
 }
     </tbody>
 </table>
+</section>
