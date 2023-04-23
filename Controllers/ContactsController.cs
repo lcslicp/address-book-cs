@@ -19,7 +19,7 @@ namespace address_book.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
@@ -27,7 +27,7 @@ namespace address_book.Controllers
                           View(await _context.Contact.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Contact'  is null.");
         }
-
+        [Authorize]
         // GET: Contacts/ShowSearchForm
         public IActionResult ShowSearchForm()
         {
